@@ -1,0 +1,96 @@
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Student Grades Manager");
+        
+        Map<String, Double> grades = new HashMap<>();
+        String subject;
+        double grade;
+
+        while (true) {
+            System.out.println("\nMenu:");
+            System.out.println("1. Add/Edit a grade");
+            System.out.println("2. Display grades");
+            System.out.println("3. Calculate average grade");
+            System.out.println("4. Display overall grade");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter the subject: ");
+                    subject = scanner.nextLine();
+                    System.out.print("Enter the grade (0-100): ");
+                    grade = scanner.nextDouble();
+
+                    if (grade < 0 || grade > 100) {
+                        System.out.println("Invalid grade. Please enter a value between 0 and 100.");
+                    } else {
+                        grades.put(subject, grade);
+                        System.out.println("Grade recorded successfully.");
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("\nGrades:");
+                    if (grades.isEmpty()) {
+                        System.out.println("No grades recorded yet.");
+                    } else {
+                        grades.forEach((key, value) -> {
+                            System.out.println(key + ": " + value);
+                        });
+                    }
+                    break;
+
+                case 3:
+                    if (grades.isEmpty()) {
+                        System.out.println("No grades to calculate average.");
+                    } else {
+                        double total = grades.values().stream().mapToDouble(Double::doubleValue).sum();
+                        double average = total / grades.size();
+                        System.out.printf("The average grade is: %.2f\n", average);
+                    }
+                    break;
+
+                case 4:
+                    if (grades.isEmpty()) {
+                        System.out.println("No grades to calculate overall grade.");
+                    } else {
+                        double total = grades.values().stream().mapToDouble(Double::doubleValue).sum();
+                        double average = total / grades.size();
+
+                        char letterGrade;
+                        if (average >= 90) {
+                            letterGrade = 'A';
+                        } else if (average >= 80) {
+                            letterGrade = 'B';
+                        } else if (average >= 70) {
+                            letterGrade = 'C';
+                        } else if (average >= 60) {
+                            letterGrade = 'D';
+                        } else {
+                            letterGrade = 'F';
+                        }
+
+                        System.out.printf("Overall Grade:\nAverage: %.2f\nLetter Grade: %c\n", average, letterGrade);
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("Exiting program.");
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid choice. Please select a valid option.");
+            }
+        }
+    }
+}
