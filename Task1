@@ -1,3 +1,11 @@
+/*/ The Student Grade Management Program is a Java application that helps manage and track student grades. 
+It allows users to input grades for various subjects, calculates averages, and displays the overall 
+performance, including numerical grades, letter grades, and GPA. The program uses classes like Student
+and GradeManager to encapsulate data and functionality, ensuring an organized structure. It includes error
+handling for invalid inputs and supports features like grade editing and subject-specific overviews. Data is
+stored using structures like ArrayList or HashMap for efficient tracking. Optional features include persistent 
+storage for saving and loading grade data. /*/
+
 import java.util.*;
 
 public class Main {
